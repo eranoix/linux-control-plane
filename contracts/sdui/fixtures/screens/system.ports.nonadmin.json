@@ -1,0 +1,46 @@
+{
+  "sdui_version": 1,
+  "screen": {
+    "id": "system.ports",
+    "title": "Portas",
+    "components": [
+      {
+        "type": "table",
+        "id": "ports-table",
+        "columns": [
+          {
+            "key": "proto",
+            "label": "Protocolo",
+            "kind": "text"
+          },
+          {
+            "key": "local",
+            "label": "Local",
+            "kind": "text"
+          },
+          {
+            "key": "peer",
+            "label": "Peer",
+            "kind": "text"
+          },
+          {
+            "key": "state",
+            "label": "Estado",
+            "kind": "text"
+          },
+          {
+            "key": "process",
+            "label": "Processo",
+            "kind": "text"
+          }
+        ],
+        "rows_source": {
+          "endpoint": "/api/mobile/v1/system/ports"
+        },
+        "empty_state": {
+          "text": "Cada linha é um socket em escuta: quem atende neste servidor, em qual porta e por qual processo. Vazio é suspeito — no mínimo o SSH e o próprio painel deveriam estar aqui. Costuma significar que o comando ss respondeu sem dados, não que o servidor parou de atender."
+        }
+      }
+    ]
+  }
+}

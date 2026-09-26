@@ -1,0 +1,46 @@
+{
+  "sdui_version": 1,
+  "screen": {
+    "id": "system.history",
+    "title": "Histórico do sistema",
+    "components": [
+      {
+        "type": "table",
+        "id": "history-table",
+        "columns": [
+          {
+            "key": "ts",
+            "label": "Horário",
+            "kind": "text"
+          },
+          {
+            "key": "cpu",
+            "label": "CPU %",
+            "kind": "text"
+          },
+          {
+            "key": "mem",
+            "label": "Memória %",
+            "kind": "text"
+          },
+          {
+            "key": "load1",
+            "label": "Load (1m)",
+            "kind": "text"
+          },
+          {
+            "key": "disk",
+            "label": "Disco %",
+            "kind": "text"
+          }
+        ],
+        "rows_source": {
+          "endpoint": "/api/mobile/v1/system/history"
+        },
+        "empty_state": {
+          "text": "Amostras de CPU, memória, load e disco, uma por minuto, da mais antiga para a mais recente. Vazio quer dizer que o painel reiniciou há pouco: este histórico vive em memória e recomeça a cada reinício. As primeiras linhas aparecem em poucos minutos, sem você fazer nada."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "sdui_version": 1,
+  "screen": {
+    "id": "docker.compose",
+    "title": "Compose",
+    "components": [
+      {
+        "type": "table",
+        "id": "compose-table",
+        "columns": [
+          {
+            "key": "stack",
+            "label": "Stack",
+            "kind": "text"
+          },
+          {
+            "key": "status",
+            "label": "Status",
+            "kind": "badge",
+            "badge_map": {
+              "partial": "warning",
+              "running": "success",
+              "stopped": "neutral",
+              "unknown": "neutral"
+            }
+          }
+        ],
+        "rows_source": {
+          "endpoint": "/api/mobile/v1/docker/compose"
+        },
+        "row_actions": [
+          {
+            "action_id": "docker.compose.up",
+            "label": "Subir",
+            "style": "secondary"
+          }
+        ],
+        "empty_state": {
+          "text": "Cada linha é um projeto Compose, agrupando os containers que subiram juntos. A lista é descoberta pelos rótulos dos containers, não por arquivos no disco: um docker-compose.yml que nunca subiu não aparece aqui. Suba a stack pelo host e ela entra na lista, com as ações que a sua permissão alcança na própria linha."
+        }
+      }
+    ]
+  }
+}

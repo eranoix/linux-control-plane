@@ -1,0 +1,49 @@
+{
+  "sdui_version": 1,
+  "screen": {
+    "id": "docker.images",
+    "title": "Imagens",
+    "components": [
+      {
+        "type": "table",
+        "id": "images-table",
+        "columns": [
+          {
+            "key": "repo_tag",
+            "label": "Repositório:Tag",
+            "kind": "text"
+          },
+          {
+            "key": "size",
+            "label": "Tamanho",
+            "kind": "text"
+          },
+          {
+            "key": "created",
+            "label": "Criada em",
+            "kind": "text"
+          }
+        ],
+        "rows_source": {
+          "endpoint": "/api/mobile/v1/docker/images"
+        },
+        "row_actions": [
+          {
+            "action_id": "docker.image.remove",
+            "label": "Remover",
+            "style": "destructive"
+          }
+        ],
+        "empty_state": {
+          "text": "Imagens são o molde de onde cada container nasce; aqui está o que já foi baixado ou construído neste servidor. Sem nenhuma imagem, nenhum container sobe — o normal é ter pelo menos as da stack em execução. Elas voltam sozinhas no próximo pull ou build de uma stack Compose."
+        }
+      },
+      {
+        "type": "confirm_destructive",
+        "id": "image-remove-confirm",
+        "action_id": "docker.image.remove",
+        "message": "Esta imagem será removida. Se estiver em uso por um container, a remoção falha a menos que 'force' seja usado."
+      }
+    ]
+  }
+}

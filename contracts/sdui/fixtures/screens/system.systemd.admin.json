@@ -1,0 +1,80 @@
+{
+  "sdui_version": 1,
+  "screen": {
+    "id": "system.systemd",
+    "title": "Serviços (systemd)",
+    "components": [
+      {
+        "type": "table",
+        "id": "systemd-table",
+        "columns": [
+          {
+            "key": "name",
+            "label": "Unidade",
+            "kind": "text"
+          },
+          {
+            "key": "load",
+            "label": "Load",
+            "kind": "text"
+          },
+          {
+            "key": "active",
+            "label": "Active",
+            "kind": "badge",
+            "badge_map": {
+              "activating": "warning",
+              "active": "success",
+              "deactivating": "warning",
+              "failed": "danger",
+              "inactive": "neutral"
+            }
+          },
+          {
+            "key": "sub",
+            "label": "Sub",
+            "kind": "text"
+          },
+          {
+            "key": "description",
+            "label": "Descrição",
+            "kind": "text"
+          }
+        ],
+        "rows_source": {
+          "endpoint": "/api/mobile/v1/system/units"
+        },
+        "row_actions": [
+          {
+            "action_id": "system.unit.start",
+            "label": "Iniciar",
+            "style": "secondary"
+          },
+          {
+            "action_id": "system.unit.stop",
+            "label": "Parar",
+            "style": "secondary"
+          },
+          {
+            "action_id": "system.unit.restart",
+            "label": "Reiniciar",
+            "style": "secondary"
+          },
+          {
+            "action_id": "system.unit.enable",
+            "label": "Habilitar",
+            "style": "secondary"
+          },
+          {
+            "action_id": "system.unit.disable",
+            "label": "Desabilitar",
+            "style": "secondary"
+          }
+        ],
+        "empty_state": {
+          "text": "As units .service do systemd, ativas ou não, com load, estado e descrição. Nenhum host com systemd tem zero services — nem que fosse só o ssh.service. Lista vazia é resposta incompleta do systemctl, não servidor sem serviço."
+        }
+      }
+    ]
+  }
+}

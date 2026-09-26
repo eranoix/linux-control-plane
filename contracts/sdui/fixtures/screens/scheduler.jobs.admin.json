@@ -1,0 +1,120 @@
+{
+  "sdui_version": 1,
+  "screen": {
+    "id": "scheduler.jobs",
+    "title": "Scheduler",
+    "components": [
+      {
+        "type": "table",
+        "id": "jobs-table",
+        "columns": [
+          {
+            "key": "name",
+            "label": "Nome",
+            "kind": "text"
+          },
+          {
+            "key": "schedule",
+            "label": "Agenda",
+            "kind": "text"
+          },
+          {
+            "key": "kind",
+            "label": "Tipo",
+            "kind": "text"
+          },
+          {
+            "key": "last_status",
+            "label": "Último status",
+            "kind": "badge",
+            "badge_map": {
+              "failed": "danger",
+              "ok": "success",
+              "skipped": "neutral"
+            }
+          },
+          {
+            "key": "next_fire",
+            "label": "Próxima execução",
+            "kind": "text"
+          }
+        ],
+        "rows_source": {
+          "endpoint": "/api/mobile/v1/scheduler/jobs"
+        },
+        "row_actions": [
+          {
+            "action_id": "scheduler.job.run_now",
+            "label": "Executar agora",
+            "style": "secondary"
+          },
+          {
+            "action_id": "scheduler.job.delete",
+            "label": "Excluir",
+            "style": "destructive"
+          }
+        ],
+        "empty_state": {
+          "text": "Jobs do agendador rodam sozinhos no horário que você definir, em sintaxe cron. Vazio significa que nada está agendado: nenhuma tarefa recorrente dispara até a primeira ser criada. Preencha nome, agenda (ex.: */15 * * * *) e tipo no formulário abaixo."
+        }
+      },
+      {
+        "type": "form",
+        "id": "job-form",
+        "fields": [
+          {
+            "key": "name",
+            "label": "Nome",
+            "kind": "text",
+            "required": true
+          },
+          {
+            "key": "schedule",
+            "label": "Agenda (cron)",
+            "kind": "text",
+            "required": true,
+            "placeholder": "*/15 * * * *"
+          },
+          {
+            "key": "kind",
+            "label": "Tipo",
+            "kind": "select",
+            "required": true,
+            "options": [
+              "docker_prune",
+              "system_reboot"
+            ]
+          },
+          {
+            "key": "enabled",
+            "label": "Ativo",
+            "kind": "bool"
+          },
+          {
+            "key": "run_as_root",
+            "label": "Executar como root",
+            "kind": "bool"
+          }
+        ],
+        "submit_action": {
+          "action_id": "scheduler.job.save",
+          "label": "Salvar",
+          "style": "primary"
+        }
+      },
+      {
+        "type": "action",
+        "id": "refresh-jobs",
+        "label": "Atualizar",
+        "action_id": "scheduler.jobs.refresh",
+        "style": "secondary"
+      },
+      {
+        "type": "confirm_destructive",
+        "id": "job-delete-confirm",
+        "action_id": "scheduler.job.delete",
+        "message": "Este job será excluído permanentemente. Essa ação não pode ser desfeita."
+      }
+    ]
+  }
+}

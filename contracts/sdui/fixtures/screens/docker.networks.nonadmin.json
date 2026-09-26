@@ -1,0 +1,36 @@
+{
+  "sdui_version": 1,
+  "screen": {
+    "id": "docker.networks",
+    "title": "Redes",
+    "components": [
+      {
+        "type": "table",
+        "id": "networks-table",
+        "columns": [
+          {
+            "key": "name",
+            "label": "Nome",
+            "kind": "text"
+          },
+          {
+            "key": "driver",
+            "label": "Driver",
+            "kind": "text"
+          },
+          {
+            "key": "scope",
+            "label": "Escopo",
+            "kind": "text"
+          }
+        ],
+        "rows_source": {
+          "endpoint": "/api/mobile/v1/docker/networks"
+        },
+        "empty_state": {
+          "text": "Redes Docker decidem quais containers enxergam quais. Esta lista não deveria ficar vazia nunca: o Docker mantém bridge, host e none mesmo num servidor sem nada rodando. Vazia significa resposta incompleta do Docker — vale conferir o docker.service em Serviços (systemd)."
+        }
+      }
+    ]
+  }
+}

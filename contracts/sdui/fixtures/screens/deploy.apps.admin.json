@@ -1,0 +1,98 @@
+{
+  "sdui_version": 1,
+  "screen": {
+    "id": "deploy.apps",
+    "title": "Deploy de apps",
+    "components": [
+      {
+        "type": "table",
+        "id": "deploy-apps-table",
+        "columns": [
+          {
+            "key": "name",
+            "label": "App",
+            "kind": "text"
+          },
+          {
+            "key": "domain",
+            "label": "Domínio",
+            "kind": "text"
+          },
+          {
+            "key": "branch",
+            "label": "Branch",
+            "kind": "text"
+          },
+          {
+            "key": "last_status",
+            "label": "Último deploy",
+            "kind": "badge"
+          },
+          {
+            "key": "updated",
+            "label": "Atualizado",
+            "kind": "datetime"
+          }
+        ],
+        "rows_source": {
+          "endpoint": "/api/mobile/v1/deploy/apps"
+        },
+        "row_actions": [
+          {
+            "action_id": "deploy.app.redeploy",
+            "label": "Reimplantar"
+          },
+          {
+            "action_id": "deploy.app.delete",
+            "label": "Excluir",
+            "style": "destructive"
+          }
+        ],
+        "empty_state": {
+          "text": "Cada linha é um app que este servidor hospeda: domínio, branch de produção e o status do último deploy. Vazio significa que nenhum app foi criado ainda — o servidor não descobre apps sozinho. Crie o primeiro no formulário abaixo; o nome vira o slug de DNS."
+        }
+      },
+      {
+        "type": "form",
+        "id": "deploy-app-create-form",
+        "fields": [
+          {
+            "key": "name",
+            "label": "Nome (slug DNS)",
+            "kind": "text",
+            "required": true,
+            "placeholder": "meu-app"
+          },
+          {
+            "key": "domain",
+            "label": "Domínio (opcional)",
+            "kind": "text"
+          },
+          {
+            "key": "branch",
+            "label": "Branch de produção",
+            "kind": "text",
+            "placeholder": "main"
+          },
+          {
+            "key": "compose_file",
+            "label": "Arquivo compose (opcional)",
+            "kind": "text",
+            "placeholder": "docker-compose.yml"
+          }
+        ],
+        "submit_action": {
+          "action_id": "deploy.app.create",
+          "label": "Criar app",
+          "style": "primary"
+        }
+      },
+      {
+        "type": "confirm_destructive",
+        "id": "deploy-app-delete-confirm",
+        "action_id": "deploy.app.delete",
+        "message": "Isto derruba os containers do app, remove nginx/env e apaga o repositório bare. Não pode ser desfeito."
+      }
+    ]
+  }
+}

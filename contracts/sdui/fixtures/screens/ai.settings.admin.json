@@ -1,0 +1,46 @@
+{
+  "sdui_version": 1,
+  "screen": {
+    "id": "ai.settings",
+    "title": "Modelos de IA",
+    "components": [
+      {
+        "type": "form",
+        "id": "ai-settings-form",
+        "fields": [
+          {
+            "key": "suggest",
+            "label": "Sugestões de IA (ai_suggest)",
+            "kind": "select",
+            "options": [
+              "inherit",
+              "haiku",
+              "sonnet",
+              "opus",
+              "fable"
+            ],
+            "value": "haiku"
+          },
+          {
+            "key": "jira_ai",
+            "label": "Auditoria/refino de ticket (jira_ai)",
+            "kind": "select",
+            "options": [
+              "inherit",
+              "haiku",
+              "sonnet",
+              "opus",
+              "fable"
+            ],
+            "value": "sonnet"
+          }
+        ],
+        "submit_action": {
+          "action_id": "ai.settings.save",
+          "label": "Salvar",
+          "style": "primary"
+        }
+      }
+    ]
+  }
+}

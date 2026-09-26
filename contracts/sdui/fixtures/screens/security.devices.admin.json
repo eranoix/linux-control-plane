@@ -1,0 +1,94 @@
+{
+  "sdui_version": 1,
+  "screen": {
+    "id": "security.devices",
+    "title": "Aparelhos (VLESS)",
+    "components": [
+      {
+        "type": "table",
+        "id": "devices-table",
+        "columns": [
+          {
+            "key": "name",
+            "label": "Nome",
+            "kind": "text"
+          },
+          {
+            "key": "exit",
+            "label": "Saída",
+            "kind": "badge",
+            "badge_map": {
+              "casa": "success",
+              "vps": "neutral"
+            }
+          },
+          {
+            "key": "datasaver",
+            "label": "Datasaver",
+            "kind": "badge",
+            "badge_map": {
+              "não": "neutral",
+              "sim": "warning"
+            }
+          },
+          {
+            "key": "created",
+            "label": "Criado em",
+            "kind": "text"
+          }
+        ],
+        "rows_source": {
+          "endpoint": "/api/mobile/v1/security/devices"
+        },
+        "row_actions": [
+          {
+            "action_id": "security.device.rename",
+            "label": "Renomear",
+            "style": "secondary"
+          },
+          {
+            "action_id": "security.device.set_exit",
+            "label": "Trocar saída",
+            "style": "secondary"
+          },
+          {
+            "action_id": "security.device.set_datasaver",
+            "label": "Alternar datasaver",
+            "style": "secondary"
+          },
+          {
+            "action_id": "security.device.remove",
+            "label": "Remover",
+            "style": "destructive"
+          }
+        ],
+        "empty_state": {
+          "text": "Os aparelhos autorizados a usar o túnel VLESS, cada um com seu UUID e sua saída. Vazio é o estado inicial: sem aparelho pareado, o túnel não aceita ninguém. Dê um nome ao aparelho no formulário abaixo para criar o primeiro."
+        }
+      },
+      {
+        "type": "form",
+        "id": "device-add-form",
+        "fields": [
+          {
+            "key": "name",
+            "label": "Nome do aparelho",
+            "kind": "text",
+            "required": true
+          }
+        ],
+        "submit_action": {
+          "action_id": "security.device.add",
+          "label": "Adicionar",
+          "style": "primary"
+        }
+      },
+      {
+        "type": "confirm_destructive",
+        "id": "device-remove-confirm",
+        "action_id": "security.device.remove",
+        "message": "Este aparelho perde acesso ao túnel imediatamente. A configuração dele deixa de funcionar."
+      }
+    ]
+  }
+}

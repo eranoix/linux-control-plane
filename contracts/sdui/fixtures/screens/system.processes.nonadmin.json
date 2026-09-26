@@ -1,0 +1,51 @@
+{
+  "sdui_version": 1,
+  "screen": {
+    "id": "system.processes",
+    "title": "Processos",
+    "components": [
+      {
+        "type": "table",
+        "id": "processes-table",
+        "columns": [
+          {
+            "key": "pid",
+            "label": "PID",
+            "kind": "text"
+          },
+          {
+            "key": "name",
+            "label": "Processo",
+            "kind": "text"
+          },
+          {
+            "key": "user",
+            "label": "Usuário",
+            "kind": "text"
+          },
+          {
+            "key": "cpu",
+            "label": "CPU %",
+            "kind": "text"
+          },
+          {
+            "key": "mem",
+            "label": "Memória %",
+            "kind": "text"
+          },
+          {
+            "key": "status",
+            "label": "Status",
+            "kind": "text"
+          }
+        ],
+        "rows_source": {
+          "endpoint": "/api/mobile/v1/system/processes"
+        },
+        "empty_state": {
+          "text": "Tudo o que está em execução no servidor agora, com o consumo de CPU e memória de cada processo. Um servidor de pé nunca tem zero processos, então lista vazia aqui é falha de leitura, não servidor ocioso. Recarregue a tela; se continuar vazia, o problema está no host, não no aplicativo."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "sdui_version": 1,
+  "screen": {
+    "id": "docker.containers",
+    "title": "Containers",
+    "components": [
+      {
+        "type": "table",
+        "id": "containers-table",
+        "columns": [
+          {
+            "key": "name",
+            "label": "Nome",
+            "kind": "text"
+          },
+          {
+            "key": "image",
+            "label": "Imagem",
+            "kind": "text"
+          },
+          {
+            "key": "status",
+            "label": "Status",
+            "kind": "badge",
+            "badge_map": {
+              "created": "neutral",
+              "dead": "danger",
+              "exited": "neutral",
+              "paused": "neutral",
+              "restarting": "warning",
+              "running": "success"
+            }
+          },
+          {
+            "key": "created",
+            "label": "Criado em",
+            "kind": "text"
+          }
+        ],
+        "rows_source": {
+          "endpoint": "/api/mobile/v1/docker/containers"
+        },
+        "row_actions": [
+          {
+            "action_id": "docker.container.start",
+            "label": "Iniciar",
+            "style": "secondary"
+          },
+          {
+            "action_id": "docker.container.stop",
+            "label": "Parar",
+            "style": "secondary"
+          },
+          {
+            "action_id": "docker.container.restart",
+            "label": "Reiniciar",
+            "style": "secondary"
+          },
+          {
+            "action_id": "docker.container.remove",
+            "label": "Remover",
+            "style": "destructive"
+          }
+        ],
+        "empty_state": {
+          "text": "Containers são as unidades que o Docker roda neste servidor; a lista traz os de pé e também os parados. Vazio é incomum aqui, porque o próprio painel roda em container — costuma significar que a stack foi derrubada. Em Docker › Compose você sobe uma stack inteira de volta."
+        }
+      },
+      {
+        "type": "confirm_destructive",
+        "id": "container-remove-confirm",
+        "action_id": "docker.container.remove",
+        "message": "Este container será removido. Se ele estiver em execução, a remoção falha a menos que 'force' seja usado."
+      }
+    ]
+  }
+}

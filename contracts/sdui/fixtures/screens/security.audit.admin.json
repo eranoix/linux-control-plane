@@ -1,0 +1,46 @@
+{
+  "sdui_version": 1,
+  "screen": {
+    "id": "security.audit",
+    "title": "Auditoria",
+    "components": [
+      {
+        "type": "table",
+        "id": "audit-table",
+        "columns": [
+          {
+            "key": "time",
+            "label": "Quando",
+            "kind": "text"
+          },
+          {
+            "key": "user",
+            "label": "Usuário",
+            "kind": "text"
+          },
+          {
+            "key": "action",
+            "label": "Ação",
+            "kind": "text"
+          },
+          {
+            "key": "target",
+            "label": "Alvo",
+            "kind": "text"
+          },
+          {
+            "key": "ip",
+            "label": "IP",
+            "kind": "text"
+          }
+        ],
+        "rows_source": {
+          "endpoint": "/api/mobile/v1/security/audit"
+        },
+        "empty_state": {
+          "text": "O rastro de quem fez o quê no painel: logins, criação de conta, ações destrutivas. Vazio quer dizer que nada aconteceu ainda — auditoria indisponível agora vira erro de carga, não tabela vazia. Não há o que configurar aqui: as linhas entram sozinhas."
+        }
+      }
+    ]
+  }
+}

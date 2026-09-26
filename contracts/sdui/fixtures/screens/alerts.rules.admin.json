@@ -1,0 +1,106 @@
+{
+  "sdui_version": 1,
+  "screen": {
+    "id": "alerts.rules",
+    "title": "Alertas",
+    "components": [
+      {
+        "type": "table",
+        "id": "rules-table",
+        "columns": [
+          {
+            "key": "name",
+            "label": "Nome",
+            "kind": "text"
+          },
+          {
+            "key": "condition",
+            "label": "Condição",
+            "kind": "text"
+          },
+          {
+            "key": "channel",
+            "label": "Canal",
+            "kind": "text"
+          },
+          {
+            "key": "enabled",
+            "label": "Ativa",
+            "kind": "bool"
+          }
+        ],
+        "rows_source": {
+          "endpoint": "/api/mobile/v1/alerts/rules"
+        },
+        "row_actions": [
+          {
+            "action_id": "alerts.rule.delete",
+            "label": "Excluir",
+            "style": "destructive"
+          }
+        ],
+        "empty_state": {
+          "text": "Regras de alerta decidem o que te avisa e por qual canal: CPU alta, deploy que falhou, disco enchendo. Vazio é o estado de fábrica — enquanto não houver regra, nenhum evento vira notificação. Monte a primeira no formulário abaixo (condição, severidade mínima e canal) e salve."
+        }
+      },
+      {
+        "type": "form",
+        "id": "rule-form",
+        "fields": [
+          {
+            "key": "name",
+            "label": "Nome",
+            "kind": "text",
+            "required": true
+          },
+          {
+            "key": "condition",
+            "label": "Condição",
+            "kind": "select",
+            "required": true,
+            "options": [
+              "",
+              "job.failed"
+            ]
+          },
+          {
+            "key": "threshold",
+            "label": "Severidade mínima",
+            "kind": "select",
+            "required": true,
+            "options": [
+              "info",
+              "warning",
+              "critical"
+            ]
+          },
+          {
+            "key": "channel",
+            "label": "Canal de notificação",
+            "kind": "select",
+            "required": true,
+            "options": [
+              "chan-golden-webhook"
+            ]
+          },
+          {
+            "key": "enabled",
+            "label": "Ativa",
+            "kind": "bool"
+          }
+        ],
+        "submit_action": {
+          "action_id": "alerts.rule.save",
+          "label": "Salvar",
+          "style": "primary"
+        }
+      },
+      {
+        "type": "confirm_destructive",
+        "id": "rule-delete-confirm",
+        "action_id": "alerts.rule.delete",
+        "message": "Esta regra de alerta será excluída. Eventos que ela cobria deixam de notificar até uma nova regra cobri-los."
+      }
+    ]
+  }
+}

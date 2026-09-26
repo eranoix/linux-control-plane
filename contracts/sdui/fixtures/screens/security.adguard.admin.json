@@ -1,0 +1,70 @@
+{
+  "sdui_version": 1,
+  "screen": {
+    "id": "security.adguard",
+    "title": "AdGuard DNS",
+    "components": [
+      {
+        "type": "detail",
+        "id": "adguard-status-detail",
+        "data_source": {
+          "endpoint": "/api/mobile/v1/security/adguard/status"
+        },
+        "fields": [
+          {
+            "key": "protection_enabled",
+            "label": "Proteção",
+            "kind": "text"
+          },
+          {
+            "key": "running",
+            "label": "Serviço",
+            "kind": "text"
+          },
+          {
+            "key": "version",
+            "label": "Versão",
+            "kind": "text"
+          },
+          {
+            "key": "num_queries",
+            "label": "Consultas",
+            "kind": "text"
+          },
+          {
+            "key": "num_blocked",
+            "label": "Bloqueadas",
+            "kind": "text"
+          },
+          {
+            "key": "blocked_pct",
+            "label": "% bloqueada",
+            "kind": "text"
+          }
+        ]
+      },
+      {
+        "type": "form",
+        "id": "adguard-protection-form",
+        "fields": [
+          {
+            "key": "enabled",
+            "label": "Proteção ativa",
+            "kind": "bool"
+          },
+          {
+            "key": "duration_ms",
+            "label": "Pausar por (ms, 0 = indefinido)",
+            "kind": "text",
+            "placeholder": "0"
+          }
+        ],
+        "submit_action": {
+          "action_id": "security.adguard.set_protection",
+          "label": "Aplicar",
+          "style": "primary"
+        }
+      }
+    ]
+  }
+}

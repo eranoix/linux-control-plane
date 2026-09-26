@@ -1,0 +1,63 @@
+{
+  "sdui_version": 1,
+  "screen": {
+    "id": "queue.jobs",
+    "title": "Fila de jobs",
+    "components": [
+      {
+        "type": "table",
+        "id": "queue-jobs-table",
+        "columns": [
+          {
+            "key": "kind",
+            "label": "Tipo",
+            "kind": "text"
+          },
+          {
+            "key": "status",
+            "label": "Status",
+            "kind": "badge"
+          },
+          {
+            "key": "progress",
+            "label": "Progresso",
+            "kind": "text"
+          },
+          {
+            "key": "owner",
+            "label": "Dono",
+            "kind": "text"
+          },
+          {
+            "key": "queued",
+            "label": "Enfileirado em",
+            "kind": "datetime"
+          }
+        ],
+        "rows_source": {
+          "endpoint": "/api/mobile/v1/queue/jobs"
+        },
+        "row_actions": [
+          {
+            "action_id": "queue.job.retry",
+            "label": "Repetir"
+          },
+          {
+            "action_id": "queue.job.cancel",
+            "label": "Cancelar",
+            "style": "destructive"
+          }
+        ],
+        "empty_state": {
+          "text": "A fila das tarefas pesadas do painel: deploy de app, backup, atualização de pacotes. Ela guarda também as já concluídas, então vazia quer dizer que nenhuma tarefa foi disparada ainda. Nada se cria aqui — os jobs entram sozinhos quando você aciona uma ação demorada em outra tela."
+        }
+      },
+      {
+        "type": "confirm_destructive",
+        "id": "queue-job-cancel-confirm",
+        "action_id": "queue.job.cancel",
+        "message": "Isto sinaliza cancelamento para o job em execução. Trabalho já feito não é desfeito."
+      }
+    ]
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "sdui_version": 1,
+  "screen": {
+    "id": "security.ufw",
+    "title": "Firewall (UFW)",
+    "components": [
+      {
+        "type": "detail",
+        "id": "ufw-status-detail",
+        "data_source": {
+          "endpoint": "/api/mobile/v1/security/ufw/status"
+        },
+        "fields": [
+          {
+            "key": "enabled",
+            "label": "Status",
+            "kind": "text"
+          },
+          {
+            "key": "output",
+            "label": "Regras (ufw status numbered)",
+            "kind": "text"
+          }
+        ]
+      },
+      {
+        "type": "form",
+        "id": "ufw-rule-form",
+        "fields": [
+          {
+            "key": "action",
+            "label": "Ação",
+            "kind": "select",
+            "required": true,
+            "options": [
+              "allow",
+              "deny",
+              "reject",
+              "delete",
+              "enable",
+              "disable"
+            ]
+          },
+          {
+            "key": "spec",
+            "label": "Regra",
+            "kind": "text",
+            "placeholder": "ex.: 22/tcp — vazio para enable/disable"
+          }
+        ],
+        "submit_action": {
+          "action_id": "security.ufw.apply",
+          "label": "Aplicar",
+          "style": "destructive"
+        }
+      },
+      {
+        "type": "confirm_destructive",
+        "id": "ufw-rule-confirm",
+        "action_id": "security.ufw.apply",
+        "message": "Isto altera o firewall imediatamente. Uma regra errada (ou desabilitar o firewall) pode bloquear seu próprio acesso remoto."
+      }
+    ]
+  }
+}

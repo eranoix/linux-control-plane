@@ -1,0 +1,47 @@
+{
+  "sdui_version": 1,
+  "screen": {
+    "id": "docker.prune",
+    "title": "Limpeza do Docker",
+    "components": [
+      {
+        "type": "form",
+        "id": "prune-form",
+        "fields": [
+          {
+            "key": "containers",
+            "label": "Containers parados",
+            "kind": "bool"
+          },
+          {
+            "key": "images",
+            "label": "Imagens não usadas",
+            "kind": "bool"
+          },
+          {
+            "key": "volumes",
+            "label": "Volumes não usados",
+            "kind": "bool"
+          },
+          {
+            "key": "build_cache",
+            "label": "Cache de build",
+            "kind": "bool"
+          }
+        ],
+        "submit_action": {
+          "action_id": "docker.prune.run",
+          "label": "Limpar",
+          "style": "destructive"
+        }
+      },
+      {
+        "type": "confirm_destructive",
+        "id": "prune-confirm",
+        "action_id": "docker.prune.run",
+        "message": "Isto remove permanentemente os dados Docker não usados nas categorias marcadas. Não pode ser desfeito.",
+        "require_typed_confirmation": "PRUNE"
+      }
+    ]
+  }
+}

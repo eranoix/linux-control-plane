@@ -1,0 +1,120 @@
+{
+  "sdui_version": 1,
+  "screen": {
+    "id": "security.users",
+    "title": "Usuários",
+    "components": [
+      {
+        "type": "table",
+        "id": "users-table",
+        "columns": [
+          {
+            "key": "username",
+            "label": "Usuário",
+            "kind": "text"
+          },
+          {
+            "key": "role",
+            "label": "Papel",
+            "kind": "badge",
+            "badge_map": {
+              "admin": "success",
+              "user": "neutral"
+            }
+          },
+          {
+            "key": "has_totp",
+            "label": "2FA",
+            "kind": "badge",
+            "badge_map": {
+              "não": "neutral",
+              "sim": "success"
+            }
+          },
+          {
+            "key": "sessions",
+            "label": "Sessões ativas",
+            "kind": "text"
+          }
+        ],
+        "rows_source": {
+          "endpoint": "/api/mobile/v1/security/users"
+        },
+        "row_actions": [
+          {
+            "action_id": "security.user.delete",
+            "label": "Remover",
+            "style": "destructive"
+          }
+        ],
+        "empty_state": {
+          "text": "As contas que entram no painel e quais delas são administradoras. Esta lista não deveria ficar vazia: a sua própria conta está nela. Para criar outra, preencha usuário e senha no formulário logo abaixo e salve."
+        }
+      },
+      {
+        "type": "form",
+        "id": "user-form",
+        "fields": [
+          {
+            "key": "username",
+            "label": "Usuário",
+            "kind": "text",
+            "required": true
+          },
+          {
+            "key": "password",
+            "label": "Senha (só na criação)",
+            "kind": "text",
+            "placeholder": "mínimo 8 caracteres — ignorado ao editar"
+          },
+          {
+            "key": "admin",
+            "label": "Administrador",
+            "kind": "bool"
+          }
+        ],
+        "submit_action": {
+          "action_id": "security.user.save",
+          "label": "Salvar",
+          "style": "primary"
+        }
+      },
+      {
+        "type": "form",
+        "id": "user-password-reset-form",
+        "fields": [
+          {
+            "key": "username",
+            "label": "Usuário",
+            "kind": "text",
+            "required": true
+          },
+          {
+            "key": "password",
+            "label": "Nova senha",
+            "kind": "text",
+            "required": true,
+            "placeholder": "mínimo 8 caracteres"
+          }
+        ],
+        "submit_action": {
+          "action_id": "security.user.reset_password",
+          "label": "Redefinir senha",
+          "style": "destructive"
+        }
+      },
+      {
+        "type": "confirm_destructive",
+        "id": "user-delete-confirm",
+        "action_id": "security.user.delete",
+        "message": "Este usuário será removido permanentemente, junto com suas sessões ativas. Não é possível remover a si mesmo nem o usuário primary."
+      },
+      {
+        "type": "confirm_destructive",
+        "id": "user-password-reset-confirm",
+        "action_id": "security.user.reset_password",
+        "message": "A senha atual deste usuário será substituída imediatamente."
+      }
+    ]
+  }
+}

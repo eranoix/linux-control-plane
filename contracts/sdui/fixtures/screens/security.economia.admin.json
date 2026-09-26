@@ -1,0 +1,46 @@
+{
+  "sdui_version": 1,
+  "screen": {
+    "id": "security.economia",
+    "title": "Uso de rede",
+    "components": [
+      {
+        "type": "table",
+        "id": "usage-table",
+        "columns": [
+          {
+            "key": "name",
+            "label": "Aparelho",
+            "kind": "text"
+          },
+          {
+            "key": "port",
+            "label": "Porta",
+            "kind": "text"
+          },
+          {
+            "key": "total_bytes",
+            "label": "Total",
+            "kind": "text"
+          },
+          {
+            "key": "rate_bps",
+            "label": "Taxa",
+            "kind": "text"
+          },
+          {
+            "key": "active_conns",
+            "label": "Conexões ativas",
+            "kind": "text"
+          }
+        ],
+        "rows_source": {
+          "endpoint": "/api/mobile/v1/security/economia"
+        },
+        "empty_state": {
+          "text": "Quanto cada aparelho pareado consumiu do túnel, medido pelo conntrack. Vazio quer dizer nenhum tráfego desde a última leitura — coletor fora do ar agora vira erro de carga, não tabela vazia. Comece pareando um aparelho em Aparelhos (VLESS)."
+        }
+      }
+    ]
+  }
+}

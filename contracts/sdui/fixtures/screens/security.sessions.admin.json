@@ -1,0 +1,68 @@
+{
+  "sdui_version": 1,
+  "screen": {
+    "id": "security.sessions",
+    "title": "Sessões",
+    "components": [
+      {
+        "type": "table",
+        "id": "sessions-table",
+        "columns": [
+          {
+            "key": "user",
+            "label": "Usuário",
+            "kind": "text"
+          },
+          {
+            "key": "ip",
+            "label": "IP",
+            "kind": "text"
+          },
+          {
+            "key": "user_agent",
+            "label": "Dispositivo",
+            "kind": "text"
+          },
+          {
+            "key": "issued_at",
+            "label": "Criada em",
+            "kind": "text"
+          },
+          {
+            "key": "last_seen",
+            "label": "Último acesso",
+            "kind": "text"
+          },
+          {
+            "key": "is_current",
+            "label": "Sessão atual",
+            "kind": "badge",
+            "badge_map": {
+              "não": "neutral",
+              "sim": "warning"
+            }
+          }
+        ],
+        "rows_source": {
+          "endpoint": "/api/mobile/v1/security/sessions"
+        },
+        "row_actions": [
+          {
+            "action_id": "security.session.revoke",
+            "label": "Revogar",
+            "style": "destructive"
+          }
+        ],
+        "empty_state": {
+          "text": "Cada linha é um login ativo no painel: usuário, IP, navegador e último acesso. Esta tela não fica vazia — a sessão que você está usando agora aparece marcada como atual. Vazia significa que o registro de sessões não respondeu."
+        }
+      },
+      {
+        "type": "confirm_destructive",
+        "id": "session-revoke-confirm",
+        "action_id": "security.session.revoke",
+        "message": "Esta sessão será revogada imediatamente. Se for a sua sessão atual (veja a coluna 'Sessão atual'), você será desconectado agora."
+      }
+    ]
+  }
+}
